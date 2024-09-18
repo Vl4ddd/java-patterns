@@ -4,12 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SocnetApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SocnetApplication.class, args);
+		Logger logger = Logger.getInstance();
+		logger.log("Start.");
+		SpringApplication.run(Application.class, args);
 	}
 
 }
+
+
 
 
