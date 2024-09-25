@@ -1,4 +1,4 @@
-package socnet.socnet;
+package socnet.socnet.Logger;
 
 import java.io.FileWriter;
 import java.io.IOException;
