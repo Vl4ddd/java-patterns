@@ -9,3 +9,5 @@ Task4. Класс PublicationDTO, внутренний класс Builder (Build
 Task Паттерн Bridge. Пакет Report. Классы Report, PdfFormatter, интерфейс ReportFormatter.
 
 Task Паттерн Composite. ПакетComposite, Классы Item, Tree, интерфейс Component
+
+Task Flyweight. Пакет Flyweight, Классы ConcreteFlyweight, Flyweight, FlyweightFactory
