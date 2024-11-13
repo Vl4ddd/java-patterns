@@ -11,3 +11,5 @@ Task Паттерн Bridge. Пакет Report. Классы Report, PdfFormatter
 Task Паттерн Composite. ПакетComposite, Классы Item, Tree, интерфейс Component
 
 Task Flyweight. Пакет Flyweight, Классы ConcreteFlyweight, Flyweight, FlyweightFactory
+
+Task Command. Пакет Mail. Конкретная команда: SendEmailCommand, Пакет Service, Класс EmailService - получатель команды, Пакет RestController, класс EmailController - вызывающий команду(invoke в паттерне)
