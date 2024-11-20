@@ -1,5 +1,6 @@
 package socnet.socnet.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import socnet.socnet.DTO.User.PublicationDTO;
+import socnet.socnet.Iterator.PublicationIterator;
 import socnet.socnet.Service.PublicationService;
 
 @RestController
@@ -26,7 +28,12 @@ public class PublicationController {
 
     @GetMapping
     public List<PublicationDTO> getAllPublications() {
-        return publicationService.getAllPublications();
+        List<PublicationDTO> result = new ArrayList<>();
+        PublicationIterator iterator = publicationService.getAllPublications();
+        while (iterator.hasNext()) {
+            result.add(iterator.next());
+        }
+        return result;
     }
 
     @GetMapping("/{id}")
@@ -43,8 +50,7 @@ public class PublicationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PublicationDTO> updatePublication(@PathVariable int id,
-            @RequestBody PublicationDTO publicationDTO) {
+    public ResponseEntity<PublicationDTO> updatePublication(@PathVariable int id, @RequestBody PublicationDTO publicationDTO) {
         return publicationService.updatePublication(id, publicationDTO)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -53,9 +59,9 @@ public class PublicationController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePublication(@PathVariable int id) {
         if (publicationService.deletePublication(id)) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build(); 
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build(); 
     }
 
 }

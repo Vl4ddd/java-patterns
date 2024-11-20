@@ -5,27 +5,36 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import socnet.socnet.DTO.User.PublicationDTO;
+import socnet.socnet.Iterator.PublicationIterator;
+import socnet.socnet.Iterator.Collections.PublicationCollection;
 
+@Service
 public class PublicationService {
 
-    private final List<PublicationDTO> publications = new ArrayList<>();
+    private final PublicationCollection publicationCollection = new PublicationCollection();
     private int currentId = 1; 
 
-    public List<PublicationDTO> getAllPublications() {
-        return publications;
+    public PublicationIterator getAllPublications() {
+        return publicationCollection.iterator(); 
     }
 
     public Optional<PublicationDTO> getPublicationById(int id) {
-        return publications.stream()
-                .filter(publication -> publication.getIdPubclication() == id)
-                .findFirst();
+        PublicationIterator iterator = getAllPublications();
+        while (iterator.hasNext()) {
+            PublicationDTO publication = iterator.next();
+            if (publication.getIdPubclication() == id) {
+                return Optional.of(publication);
+            }
+        }
+        return Optional.empty();
     }
 
     public PublicationDTO createPublication(PublicationDTO publicationDTO) {
         publicationDTO.setIdPubclication(currentId++);
-        publications.add(publicationDTO);
+        publicationCollection.addPublication(publicationDTO);
         return publicationDTO;
     }
 
@@ -33,15 +42,23 @@ public class PublicationService {
         Optional<PublicationDTO> existingPublication = getPublicationById(id);
         if (existingPublication.isPresent()) {
             publicationDTO.setIdPubclication(id);
-            publications.remove(existingPublication.get());
-            publications.add(publicationDTO);
+            publicationCollection.removePublication(existingPublication.get());
+            publicationCollection.addPublication(publicationDTO);
             return Optional.of(publicationDTO);
         }
         return Optional.empty();
     }
 
     public boolean deletePublication(int id) {
-        return publications.removeIf(publication -> publication.getIdPubclication() == id);
+        PublicationIterator iterator = getAllPublications();
+        while (iterator.hasNext()) {
+            PublicationDTO publication = iterator.next();
+            if (publication.getIdPubclication() == id) {
+                publicationCollection.removePublication(publication);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
