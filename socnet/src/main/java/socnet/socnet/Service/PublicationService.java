@@ -1,37 +1,47 @@
 package socnet.socnet.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import socnet.socnet.Repository.PublicationRepository;
 import socnet.socnet.DTO.User.PublicationDTO;
 
 public class PublicationService {
 
-    @Autowired
-    private PublicationRepository publicationRepository;
+    private final List<PublicationDTO> publications = new ArrayList<>();
+    private int currentId = 1; 
 
     public List<PublicationDTO> getAllPublications() {
-        return publicationRepository.findAll();
+        return publications;
     }
 
     public Optional<PublicationDTO> getPublicationById(int id) {
-        return publicationRepository.findById(id);
+        return publications.stream()
+                .filter(publication -> publication.getIdPubclication() == id)
+                .findFirst();
     }
 
-    public PublicationDTO createPublication(PublicationDTO publication) {
-        return publicationRepository.save(publication);
+    public PublicationDTO createPublication(PublicationDTO publicationDTO) {
+        publicationDTO.setIdPubclication(currentId++);
+        publications.add(publicationDTO);
+        return publicationDTO;
     }
 
-    public PublicationDTO updatePublication(int id, PublicationDTO publication) {
-        publication.setIdPublication(id);
-        return publicationRepository.save(publication);
+    public Optional<PublicationDTO> updatePublication(int id, PublicationDTO publicationDTO) {
+        Optional<PublicationDTO> existingPublication = getPublicationById(id);
+        if (existingPublication.isPresent()) {
+            publicationDTO.setIdPubclication(id);
+            publications.remove(existingPublication.get());
+            publications.add(publicationDTO);
+            return Optional.of(publicationDTO);
+        }
+        return Optional.empty();
     }
 
-    public void deletePublication(int id) {
-        publicationRepository.deleteById(id);
+    public boolean deletePublication(int id) {
+        return publications.removeIf(publication -> publication.getIdPubclication() == id);
     }
 
 }
