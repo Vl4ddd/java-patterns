@@ -1,10 +1,10 @@
 package socnet.socnet.DTO.User;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 public class PublicationDTO {
 
     private int IdPubclication;
