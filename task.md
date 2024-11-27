@@ -17,3 +17,6 @@ Task Command. Пакет Mail. Конкретная команда: SendEmailCom
 Task Iterator. Пакет Iterator и все файлы/пакеты в нем. PublicationIterator - итератор. PublicationCollectionIterator(внутренний класс PublicationCollection) - конкретный итератор. PublicationCollection - класс в котором созадется итератор и коллекция. PublicationCOntroller через PublicationService использует итератор.
 
 Task Observer. Пакет observer - два интерфейса Observer и Subject. Пакет Service Классы EmailService - конкретный субьект. UserService - конкретный наблюдатель. После отправки сообщения обьект уведомляет наблюдателей об этом и наблюдатели реагируют на него через метод update.
+
+
+Task Memento. Пакет Status. класс Status - originator, класс StatusMemento - memento, StatusCareTaker - caretaker(упарвляющий). Использование - пакет RestController, класс StatusController.
