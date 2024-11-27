@@ -15,3 +15,5 @@ Task Flyweight. Пакет Flyweight, Классы ConcreteFlyweight, Flyweight,
 Task Command. Пакет Mail. Конкретная команда: SendEmailCommand, Пакет Service, Класс EmailService - получатель команды, Пакет RestController, класс EmailController - вызывающий команду(invoke в паттерне)
 
 Task Iterator. Пакет Iterator и все файлы/пакеты в нем. PublicationIterator - итератор. PublicationCollectionIterator(внутренний класс PublicationCollection) - конкретный итератор. PublicationCollection - класс в котором созадется итератор и коллекция. PublicationCOntroller через PublicationService использует итератор.
+
+Task Observer. Пакет observer - два интерфейса Observer и Subject. Пакет Service Классы EmailService - конкретный субьект. UserService - конкретный наблюдатель. После отправки сообщения обьект уведомляет наблюдателей об этом и наблюдатели реагируют на него через метод update.
