@@ -21,3 +21,5 @@ Task Observer. Пакет observer - два интерфейса Observer и Sub
 Task Memento. Пакет Status. класс Status - originator, класс StatusMemento - memento, StatusCareTaker - caretaker(упарвляющий). Использование - пакет RestController, класс StatusController.
 
 Task Strategy. Пакет Payment, PaymentStrategy - интерфйес для стратегий, YmoneyPayment, CreditCardPayment - конкретные стратегии, PaymentContext - контекст. Пакет RestController Класс PaymentController - использование.
+
+Task State. Пакет Profile. ProfileState - интерфейс для состояний, PrivateProfileState, PublicProfileState - конкретные состояния. ProfileCOntext - контекст состояний. 
